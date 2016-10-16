@@ -1,6 +1,7 @@
 'use strict'
 
 const express = require(`express`)
+const session = require(`express-session`)
 const path = require(`path`)
 const logger = require(`morgan`)
 const cookieParser = require(`cookie-parser`)
@@ -22,7 +23,10 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false, }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, `public`)))
-app.use(express.session({ secret: `keyboard cat`, }))
+app.use(session({
+  secret: `giraffe dinner party`,
+  resave: false, saveUninitialized: false,
+}))
 app.use(passport.initialize())
 app.use(passport.session())
 
