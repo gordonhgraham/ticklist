@@ -1,26 +1,26 @@
 'use strict'
 
-var express = require(`express`)
-var router = express.Router()
+const express = require(`express`)
+const router = express.Router()
 
 /* GET landing page. */
 router.get(`/`, (req, res, next) => {
-  res.render(`index`, { title: `index` })
+  res.render(`index`, { title: `index`, })
 })
 
 /* POST new user signup */
 router.post(`/signup`, (req, res, next) => {
-  res.render(`index`, { title: `signup` })
+  res.render(`index`, { title: `signup`, })
 })
 
 /* POST user login */
 router.post(`/login`, (req, res, next) => {
-  res.render(`index`, { title: `login` })
+  res.render(`index`, { title: `login`, })
 })
 
 /* GET user logout. */
 router.get(`/logout`, (req, res, next) => {
-  res.render(`index`, { title: `logout` })
+  res.render(`index`, { title: `logout`, })
 })
 
 module.exports = router
