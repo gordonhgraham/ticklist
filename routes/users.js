@@ -3,9 +3,9 @@
 const express = require(`express`)
 const router = express.Router()
 
-router.get(`/`, (req, res, next) => {
-  res.render(`index`, { title: `FB LOGIN SUCCESS`, })
-})
+// router.get(`/`, (req, res, next) => {
+//   res.render(`user_home`, { layout: `user_layout.hbs`, title: `User Home`, })
+// })
 
 /* GET list ticks from users/userId. */
 router.get(`/:id`, (req, res, next) => {
