@@ -1,7 +1,12 @@
 'use strict'
 
 const express = require(`express`)
+const passport = require(`../config/passport`)
 const router = express.Router()
+
+router.get('/login/facebook',
+  passport.authenticate('facebook'));
+
 
 /* GET landing page. */
 router.get(`/`, (req, res, next) => {
