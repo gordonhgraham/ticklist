@@ -27,13 +27,11 @@ const FacebookStrategy = require(`passport-facebook`).Strategy
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: `http://localhost:3000/auth/facebook/callback`,
+  callbackURL: `http://localhost:3000/users/`,
 }, (accessToken, refreshToken, profile, done) => {
-  // use knex instad
-  // User.findOrCreate(..., (err, user) => {
-  //   if (err) { return done(err) }
-  //   done(null, user)
-  // })
+  // user.findOrCreate(..., (err, user) => {
+    // if (err) { return done(err) }
+    // done(null, user) })
 }))
 
 passport.serializeUser((user, done) => {

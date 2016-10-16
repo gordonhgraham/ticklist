@@ -3,6 +3,10 @@
 const express = require(`express`)
 const router = express.Router()
 
+router.get(`/`, (req, res, next) => {
+  res.render(`index`, { title: `FB LOGIN SUCCESS`, })
+})
+
 /* GET list ticks from users/userId. */
 router.get(`/:id`, (req, res, next) => {
   res.render(`index`, { title: `users`, })

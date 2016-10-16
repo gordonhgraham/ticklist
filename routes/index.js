@@ -4,9 +4,8 @@ const express = require(`express`)
 const passport = require(`../config/passport`)
 const router = express.Router()
 
-router.get('/login/facebook',
-  passport.authenticate('facebook'));
-
+router.get(`/login/facebook`,
+  passport.authenticate(`facebook`, { scope: `email`, }))
 
 /* GET landing page. */
 router.get(`/`, (req, res, next) => {
@@ -19,7 +18,7 @@ router.post(`/signup`, (req, res, next) => {
 })
 
 /* POST user login */
-router.post(`/login`, (req, res, next) => {
+router.post(`/login/`, (req, res, next) => {
   res.render(`index`, { title: `login`, })
 })
 
