@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "knex": "knex",
+    "heroku-postbuild": "knex migrate:latest"
   },
   "dependencies": {
     "body-parser": "~1.15.1",
@@ -19,5 +21,8 @@
     "passport-facebook": "^2.1.1",
     "pg": "^6.1.0",
     "serve-favicon": "~2.3.0"
+  },
+  "engines": {
+    "node": "v6.8.0"
   }
 }
