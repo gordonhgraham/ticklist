@@ -7,9 +7,9 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
     <!--Import Google Icon Font-->
-      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import jQuery before materialize.js-->
-      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
     <!-- Local javascript -->
@@ -17,45 +17,64 @@
 </head>
 
 <body>
-  <nav>
-      <div class="nav-wrapper light-green darken-3">
-        <a href="#!" class="brand-logo">Ticklist</a>
-        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-        <ul class="right hide-on-med-and-down">
-          <li><a href="">Sign Up</a></li>
-          <li><a href="">Login</a></li>
-        </ul>
-        <ul class="side-nav" id="mobile-demo">
-          <li><a href="">Sign Up</a></li>
-          <li><a href="">Login</a></li>
-        </ul>
-      </div>
+    <nav>
+        <div class="nav-wrapper light-green darken-3">
+            <a href="#!" class="brand-logo">Ticklist</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a class="waves-effect waves-light btn modal-trigger light-green darken-1" href="#signup">Sign Up</a></li>
+                <li><a class="waves-effect waves-light btn modal-trigger light-green darken-1" href="#login">Log In</a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+                <li><a class="modal-trigger" href="#signup">Sign Up</a></li>
+                <li><a class="modal-trigger" href="#login">Login</a></li>
+            </ul>
+        </div>
     </nav>
+
+    <div id="signup" class="modal">
+        <div class="modal-content">
+            <h4>Sign Up</h4>
+            <a class="waves-effect waves-light btn light-green darken-2" href="http://localhost:3000/login/facebook">Sign Up With Facebook</a>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+        </div>
+    </div>
+    <div id="login" class="modal">
+        <div class="modal-content">
+            <h4>Log In</h4>
+            <a class="waves-effect waves-light btn light-green darken-2" href="http://localhost:3000/login/facebook">Log In With Facebook</a>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+        </div>
+    </div>
 
     {{{body}}}
 
     <footer class="page-footer light-green darken-3">
-              <div class="container">
-                <div class="row">
-                  <div class="col l6 s12">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
                     <h5 class="white-text">Ticklist</h5>
                     <p class="grey-text text-lighten-4">Keep track of your climbs, attempts, and sends.</p>
-                  </div>
-                  <div class="col l4 offset-l2 s12">
-                    <ul>
-                      <li><a class="grey-text text-lighten-3" href="">Sign Up</a></li>
-                      <li><a class="grey-text text-lighten-3" href="">Login</a></li>
-                    </ul>
-                  </div>
                 </div>
-              </div>
-              <div class="footer-copyright">
-                <div class="container">
+                <div class="col l4 offset-l2 s12">
+                    <ul>
+                        <li><a class="grey-text text-lighten-3 modal-trigger" href="#signup">Sign Up</a></li>
+                        <li><a class="grey-text text-lighten-3 modal-trigger" href="#login">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
                 &copy; 2016 GHG
                 <a class="grey-text text-lighten-4 right" href="#!"><i class="material-icons">open_in_browser</i></a>
-                </div>
-              </div>
-            </footer>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

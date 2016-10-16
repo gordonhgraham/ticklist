@@ -9,7 +9,7 @@ router.get(`/login/facebook`,
 
 /* GET landing page. */
 router.get(`/`, (req, res, next) => {
-  res.render(`index`, { layout: `user_layout.hbs`, title: `index`, })
+  res.render(`index`, { title: `index`, })
 })
 
 /* POST new user signup */
