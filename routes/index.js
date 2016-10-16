@@ -1,9 +1,26 @@
-var express = require('express');
-var router = express.Router();
+'use strict'
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+var express = require(`express`)
+var router = express.Router()
 
-module.exports = router;
+/* GET landing page. */
+router.get(`/`, (req, res, next) => {
+  res.render(`index`, { title: `index` })
+})
+
+/* POST new user signup */
+router.post(`/signup`, (req, res, next) => {
+  res.render(`index`, { title: `signup` })
+})
+
+/* POST user login */
+router.post(`/login`, (req, res, next) => {
+  res.render(`index`, { title: `login` })
+})
+
+/* GET user logout. */
+router.get(`/logout`, (req, res, next) => {
+  res.render(`index`, { title: `logout` })
+})
+
+module.exports = router
