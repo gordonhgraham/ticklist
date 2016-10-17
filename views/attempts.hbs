@@ -1,9 +1,9 @@
 <div class="container">
     <div class="row">
         <div class="col s-6">
-            <h1>Attempts</h1>
-            <h3>{{tick.name}}</h3>
-            <h4>{{tick.area}}</h4>
+            <h1>Attempts On:</h1>
+            <h4>{{tick.name}}</h4>
+            <h5>{{tick.area}}</h5>
         </div>
         <div class="col offset-s4 s-2 add-btn ">
             <a class="btn-floating btn-large waves-effect waves-light light-green darken-1 modal-trigger" href="#addattempt"><i class="material-icons">add</i></a>
@@ -13,7 +13,7 @@
         <div class="modal-content">
             <h4>New Attempt</h4>
             <div class="row">
-                <form class="col s12" method="post" action="/users/attempts">
+                <form class="col s12" method="post" action="/attempts/ticks/{{tick.id}}">
                     <div class="row">
                         <div class="input-field col s6">
                             <select name="send_type">
@@ -26,14 +26,14 @@
                             <label>Send Type</label>
                         </div>
                         <div class="input-field col s6">
-                            <input name="area" id="area" type="text" class="validate">
-                            <label for="area">Name of Partner</label>
+                            <input name="partner" id="partner" type="text" class="validate">
+                            <label for="partner">Name of Partner</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <textarea id="Notes" name="notes" class="materialize-textarea"></textarea>
-                            <label for="Notes">Notes</label>
+                            <textarea id="notes" name="notes" class="materialize-textarea"></textarea>
+                            <label for="notes">Notes</label>
                         </div>
                     </div>
             </div>
@@ -56,12 +56,12 @@
             </thead>
 
             <tbody>
-                {{#each data}}
+                {{#each attempts}}
                     <tr id="{{id}}">
                         <td>{{send_type}}</td>
                         <td>{{partner}}</td>
                         <td>{{notes}}</td>
-                        <td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a></td>
+                        <td><a class="btn-floating btn-small waves-effect waves-light orange click-to-toggle"><i class="material-icons">delete</i></a></td>
                     </tr>
                 {{/each}}
             </tbody>
