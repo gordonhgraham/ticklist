@@ -4,9 +4,9 @@ const express = require(`express`)
 const router = express.Router()
 
 
-// router.get(`/`, (req, res, next) => {
-//   res.render(`attempts`, { layout: `user_layout`, title: `attempts`})
-// })
+router.get(`/`, (req, res, next) => {
+  res.render(`attempts`, { layout: `user_layout`, })
+})
 
 /* GET read tick and list attempts at /attempts/ticks/tickId. */
 router.get(`/ticks/:id`, (req, res, next) => {

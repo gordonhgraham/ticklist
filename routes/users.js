@@ -33,7 +33,7 @@ router.post(`/ticks`, (req, res, next) => {
       knex(`ticks`)
         .where(`user_id`, 1)
         .then(data => {
-          res.redirect(`/`)
+          res.redirect(`/users`)
         })
     })
     .catch(err => {
