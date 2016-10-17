@@ -1,4 +1,68 @@
-<h1>{{title}}</h1>
-<p>
-  This is the {{title}}.
-</p>
+<div class="container">
+    <div class="row">
+        <div class="col s-6">
+            <h1>Climbs</h1>
+        </div>
+        <div class="col offset-s4 s-2 add-btn ">
+            <a class="btn-floating btn-large waves-effect waves-light light-green darken-1 modal-trigger" href="#addtick"><i class="material-icons">add</i></a>
+        </div>
+    </div>
+    <div id="addtick" class="modal">
+        <div class="modal-content">
+            <h4>New Climb</h4>
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="name" type="text" class="validate" required>
+                            <label for="name">Name of Route</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="area" type="text" class="validate" required>
+                            <label for="area">Name of Crag</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="grade" type="text" class="validate">
+                            <label for="grade">Grade</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <select>
+                                <option value="bouldering">Bouldering</option>
+                                <option value="sport">Sport</option>
+                                <option value="traditional">Traditional</option>
+                            </select>
+                            <label>Climbing Style</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="submit" class="modal-action waves-effect waves-green btn-flat">Save</a>
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="highlight">
+            <thead>
+                <tr>
+                    <th data-field="name_area">Route &amp; Crag Name</th>
+                    <th data-field="grade_style">Grade &amp; Style</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {{#each data}}
+                    <tr>
+                        <td>{{name}}<br>-{{area}}</td>
+                        <td>{{grade}}<br>-{{style}}</td>
+                        <td style="display: none">{{id}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

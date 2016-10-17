@@ -2,10 +2,23 @@
 
 const express = require(`express`)
 const router = express.Router()
+const knex = require(`../knex.js`)
 
-// router.get(`/`, (req, res, next) => {
-//   res.render(`user_home`, { layout: `user_layout.hbs`, title: `User Home`, })
-// })
+router.get(`/`, (req, res, next) => {
+  knex(`ticks`)
+    .where(`user_id`, 1)
+    .then(data => {
+      console.log(data)
+      res.render(`user_home`, {
+        layout: `user_layout.hbs`,
+        data,
+        // name: data.name,
+        // area: data.area,
+        // grade: data.grade,
+        // style: data.style,
+      })
+    })
+})
 
 /* GET list ticks from users/userId. */
 router.get(`/:id`, (req, res, next) => {
