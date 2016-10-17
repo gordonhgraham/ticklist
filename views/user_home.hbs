@@ -11,24 +11,24 @@
         <div class="modal-content">
             <h4>New Climb</h4>
             <div class="row">
-                <form class="col s12">
+                <form class="col s12" method="post" action="/users/ticks">
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="name" type="text" class="validate" required>
+                            <input name="name" id="name" type="text" class="validate" required>
                             <label for="name">Name of Route</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="area" type="text" class="validate" required>
+                            <input name="area" id="area" type="text" class="validate" required>
                             <label for="area">Name of Crag</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="grade" type="text" class="validate">
+                            <input name="grade" id="grade" type="text" class="validate">
                             <label for="grade">Grade</label>
                         </div>
                         <div class="input-field col s6">
-                            <select>
+                            <select name="style">
                                 <option value="bouldering">Bouldering</option>
                                 <option value="sport">Sport</option>
                                 <option value="traditional">Traditional</option>
@@ -36,13 +36,13 @@
                             <label>Climbing Style</label>
                         </div>
                     </div>
-                </form>
             </div>
         </div>
         <div class="modal-footer">
-            <a href="submit" class="modal-action waves-effect waves-green btn-flat">Save</a>
+            <button type="submit" name="action" class="modal-action waves-effect waves-green btn-flat">Save</button>
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
         </div>
+        </form>
     </div>
 
     <div class="row">
@@ -56,11 +56,13 @@
 
             <tbody>
                 {{#each data}}
-                    <tr>
-                        <td>{{name}}<br>-{{area}}</td>
+
+                    <tr id="{{id}}">
+                        <td><a href="/attempts/ticks/{{id}}">{{name}}<br>-{{area}}</a></td>
                         <td>{{grade}}<br>-{{style}}</td>
-                        <td class="tick_id" style="display: none">{{id}}</td>
+                        <!-- <td class="tick_id" style="display: none">{{id}}</td> -->
                     </tr>
+
                 {{/each}}
             </tbody>
         </table>
