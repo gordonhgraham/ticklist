@@ -6,7 +6,7 @@ const path = require(`path`)
 const logger = require(`morgan`)
 const cookieParser = require(`cookie-parser`)
 const bodyParser = require(`body-parser`)
-const passport = require(`./config/passport.js`)
+// const passport = require(`./config/passport.js`)
 
 const routes = require(`./routes/index`)
 const users = require(`./routes/users`)
@@ -24,11 +24,11 @@ app.use(bodyParser.urlencoded({ extended: false, }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, `public`)))
 app.use(session({
-  secret: `giraffe dinner party`,
+  secret: process.env.SESSION_SECRET,
   resave: false, saveUninitialized: false,
 }))
-app.use(passport.initialize())
-app.use(passport.session())
+// app.use(passport.initialize())
+// app.use(passport.session())
 
 app.use(`/`, routes)
 app.use(`/users`, users)
