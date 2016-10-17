@@ -42,7 +42,16 @@ router.post(`/ticks/:id`, (req, res, next) => {
 
 /* DELETE attempt. */
 router.delete(`/:id`, (req, res, next) => {
-  res.render(`index`, { title: `delete: attempts`, })
+  const attemptId = req.params.id
+
+  knex(`attempts`)
+    .where(`id`, attemptId)
+    .del()
+    .then(() => {
+      // need to get tick id...
+      res.redirect(`/ticks/:id`)
+    })
+    .catch(err => { if (err) { return next(err) } })
 })
 
 /* PUT update tick. */
