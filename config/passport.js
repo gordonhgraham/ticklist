@@ -5,6 +5,7 @@ const app = require(`../app.js`)
 const passport = require(`passport`)
   // const LocalStrategy = require(`passport-local`).Strategy
 const FacebookStrategy = require(`passport-facebook`).Strategy
+const knex = require(`../knex.js`)
 
 // const knex = require()
 
@@ -30,9 +31,8 @@ passport.use(new FacebookStrategy({
   clientSecret: process.env.FACEBOOK_APP_SECRET,
   callbackURL: `http://localhost:3000/auth/facebook/callback`,
 }, (accessToken, refreshToken, profile, done) => {
-    console.log(`callback`)
-    console.log(profile)
-  // user.findOrCreate(..., (err, user) => {
+  console.log(`profile`, profile)
+    // knex(`users`)
     // if (err) { return done(err) }
     // done(null, user) })
 }))
