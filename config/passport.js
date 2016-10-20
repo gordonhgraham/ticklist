@@ -1,11 +1,13 @@
 'use strict'
 
 require(`dotenv`).load()
-const app = require(`../app.js`)
+
+// const app = require(`../app.js`)
+// const LocalStrategy = require(`passport-local`).Strategy
 const passport = require(`passport`)
-  // const LocalStrategy = require(`passport-local`).Strategy
 const FacebookStrategy = require(`passport-facebook`).Strategy
-const knex = require(`../knex.js`)
+
+// const knex = require(`../knex.js`)
 
 // const knex = require()
 
@@ -30,12 +32,18 @@ passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
   callbackURL: `http://localhost:3000/auth/facebook/callback`,
-}, (accessToken, refreshToken, profile, done) => {
-  console.log(`profile`, profile)
-    // knex(`users`)
-    // if (err) { return done(err) }
-    // done(null, user) })
-}))
+  profileFields: [`id`, `email`, `first_name`, `last_name`]
+},
+  (accessToken, refreshToken, profile, cb) => {
+    console.log(`accessToken`, accessToken)
+    console.log(`refreshToken`, refreshToken)
+    console.log(`profile`, profile)
+
+    // User.findOrCreate({ facebookId: profile.id }, (err, user) => {
+    //   return cb(err, user)
+    // })
+  }
+))
 
 passport.serializeUser((user, done) => {
   done(null, user)

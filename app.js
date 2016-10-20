@@ -20,12 +20,12 @@ app.set(`view engine`, `hbs`)
 
 app.use(logger(`dev`))
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false, }))
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, `public`)))
 app.use(session({
   secret: `turkey sandwich`,
-  resave: false, saveUninitialized: false,
+  resave: false, saveUninitialized: false
 }))
 app.use(passport.initialize())
 app.use(passport.session())
@@ -35,13 +35,13 @@ app.use(`/users`, users)
 app.use(`/attempts`, attempts)
 
 app.get(`/auth/facebook`,
-  passport.authenticate(`facebook`))
+  passport.authenticate(`facebook`, { scope: [`email`] }))
 
 app.get(`/auth/facebook/callback`,
-  passport.authenticate(`facebook`, { failureRedirect: `/`, }),
+  passport.authenticate(`facebook`, { failureRedirect: `/login` }),
   (req, res) => {
     // Successful authentication, redirect home.
-    res.redirect(`/users`)
+    res.redirect(`/`)
   })
 
 // catch 404 and forward to error handler
@@ -61,7 +61,7 @@ if (app.get(`env`) === `development`) {
     res.status(err.status || 500)
     res.render(`error`, {
       message: err.message,
-      error: err,
+      error: err
     })
   })
 }
@@ -72,7 +72,7 @@ app.use((err, req, res) => {
   res.status(err.status || 500)
   res.render(`error`, {
     message: err.message,
-    error: {},
+    error: {}
   })
 })
 
