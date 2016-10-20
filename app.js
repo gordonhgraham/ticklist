@@ -41,7 +41,8 @@ app.get(`/auth/facebook/callback`,
   passport.authenticate(`facebook`, { failureRedirect: `/login` }),
   (req, res) => {
     // Successful authentication, redirect home.
-    res.redirect(`/`)
+    const userId = req.user.fb_id
+    res.redirect(`/users/${userId}`)
   })
 
 // catch 404 and forward to error handler

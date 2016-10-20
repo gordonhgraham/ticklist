@@ -1,6 +1,6 @@
 'use strict'
 
-/* eslint-disable camelcase */
+/* eslint-disable camelcase, max-params */
 
 require(`dotenv`).load()
 
@@ -27,48 +27,47 @@ const knex = require(`../knex.js`)
 //   }
 // ))
 
-passport.use(new FacebookStrategy({
-  clientID: process.env.FACEBOOK_APP_ID,
-  clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: `http://localhost:3000/auth/facebook/callback`,
-  profileFields: [`id`, `email`, `first_name`, `last_name`]
-},
-  (accessToken, refreshToken, profile, cb) => {
-    knex(`users`)
-      .where(`fb_id`, profile.id)
-      .first()
-      .then(data => {
-        // if user exists, redirect to user homepage
-        if (data) {
-          // update user
-        } else {
-          // if user doesn't exist insert user
-          knex(`users`)
-            .insert({
-              fb_id: profile.id,
-              email: profile.emails[0].value,
-              first_name: profile.name.givenName,
-              last_name: profile.name.familyName,
-              token: accessToken
-            })
-            .then((err, user) => {
-              console.log(`user--`, user)
-              return cb(err, user)
-            })
-        }
-      })
-
-    // User.findOrCreate({ facebookId: profile.id }, (err, user) => {
-    //   return cb(err, user)
-    // })
-  }
-))
-
 passport.serializeUser((user, done) => {
   done(null, user)
 })
 passport.deserializeUser((obj, done) => {
   done(null, obj)
 })
+
+passport.use(new FacebookStrategy({
+  clientID: process.env.FACEBOOK_APP_ID,
+  clientSecret: process.env.FACEBOOK_APP_SECRET,
+  callbackURL: `http://localhost:3000/auth/facebook/callback`,
+  profileFields: [`id`, `email`, `first_name`, `last_name`]
+},
+(accessToken, refreshToken, profile, cb) => {
+  knex(`users`)
+    .where(`fb_id`, profile.id)
+    .first()
+    .then(data => {
+      if (data) {
+        // if user exists
+        // console.log(`1-existing user--`, data)
+
+        cb(null, data)
+      } else {
+        // if user doesn't exist insert user
+        knex(`users`)
+          .insert({
+            fb_id: profile.id,
+            email: profile.emails[0].value,
+            first_name: profile.name.givenName,
+            last_name: profile.name.familyName,
+            token: accessToken
+          }, `*`)
+          .then(user => {
+            // console.log(`2-new user--`, user)
+
+            return cb(null, user)
+          })
+      }
+    })
+    .catch(err => { if (err) { return err } })
+}))
 
 module.exports = passport

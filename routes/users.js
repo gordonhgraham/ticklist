@@ -4,37 +4,34 @@ const express = require(`express`)
 const router = express.Router()
 const knex = require(`../knex.js`)
 
-router.get(`/`, (req, res, next) => {
-  knex(`ticks`)
-    .where(`user_id`, 1)
-    .then(data => {
-      res.render(`user_home`, { layout: `user_layout.hbs`, data, })
-    })
-})
 
 /* GET list ticks from users/userId. */
 router.get(`/:id`, (req, res, next) => {
-  res.render(`index`, { title: `users`, })
+  const userId = req.session.passport.user.fb_id
+
+  knex(`ticks`)
+  .where(`user_fb_id`, userId)
+    .then(data => {
+      // console.log(data)
+      res.render(`user_home`, { layout: `user_layout.hbs`, data })
+    })
 })
 
 /* POST create new tick at /users/ticks. */
 router.post(`/ticks`, (req, res, next) => {
+  const userId = req.session.passport.user.fb_id
   const newTick = req.body
 
   knex(`ticks`)
     .insert({
-      user_id: 1,
+      user_fb_id: userId,
       name: newTick.name,
       area: newTick.area,
       grade: newTick.grade,
-      style: newTick.style,
+      style: newTick.style
     })
     .then(() => {
-      knex(`ticks`)
-        .where(`user_id`, 1)
-        .then(data => {
-          res.redirect(`/users`)
-        })
+      res.redirect(`/users/${userId}`)
     })
     .catch(err => {
       if (err) { return next(err) }

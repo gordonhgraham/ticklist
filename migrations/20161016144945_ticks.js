@@ -10,7 +10,7 @@ exports.up = knex => {
       table.string(`area`).notNullable()
       table.string(`grade`)
       table.string(`style`)
-      table.integer(`user_id`).references(`users.id`).notNullable().onDelete(`cascade`).index()
+      table.string(`user_fb_id`).references(`users.fb_id`).notNullable().onDelete(`cascade`).index()
       table.timestamps(true, true)
     })
   })
