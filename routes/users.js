@@ -6,7 +6,7 @@ const knex = require(`../knex.js`)
 
 
 /* GET list ticks from users/userId. */
-router.get(`/:id`, (req, res, next) => {
+router.get(`/`, (req, res, next) => {
   const userId = req.session.passport.user.fb_id
 
   knex(`ticks`)
@@ -31,7 +31,7 @@ router.post(`/ticks`, (req, res, next) => {
       style: newTick.style
     })
     .then(() => {
-      res.redirect(`/users/${userId}`)
+      res.redirect(`/users`)
     })
     .catch(err => {
       if (err) { return next(err) }

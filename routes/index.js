@@ -28,7 +28,8 @@ router.post(`/login/`, (req, res, next) => {
 
 /* GET user logout. */
 router.get(`/logout`, (req, res, next) => {
-  res.render(`index`, { title: `logout`, })
+  req.session = null
+  res.redirect(`/`)
 })
 
 module.exports = router

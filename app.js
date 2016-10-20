@@ -42,7 +42,7 @@ app.get(`/auth/facebook/callback`,
   (req, res) => {
     // Successful authentication, redirect home.
     const userId = req.user.fb_id
-    res.redirect(`/users/${userId}`)
+    res.redirect(`/users`)
   })
 
 // catch 404 and forward to error handler
