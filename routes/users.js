@@ -7,8 +7,9 @@ const knex = require(`../knex.js`)
 
 /* GET list ticks from users/userId. */
 router.get(`/`, (req, res, next) => {
+  console.log(`userId before declaration`, req.session.passport.user.fb_id)
   const userId = req.session.passport.user.fb_id
-  console.log(userId)
+  console.log(`userId`, userId)
 
   knex(`ticks`)
   .where(`user_fb_id`, userId)
