@@ -41,18 +41,19 @@ router.post(`/ticks/:id`, (req, res, next) => {
 })
 
 /* DELETE attempt. */
-router.delete(`/:id`, (req, res, next) => {
-  res.render(`index`, { title: `delete: attempts`, })
+router.get(`/delete/:id`, (req, res, next) => {
+  console.log(`id`, req.params.id)
+  res.redirect(`http://google.com`)
 })
 
-/* PUT update tick. */
-router.put(`/ticks/:id`, (req, res, next) => {
-  res.render(`index`, { title: `update tick`, })
-})
-
-/* DELETE tick. */
-router.get(`/ticks/:id`, (req, res, next) => {
-  res.render(`index`, { title: `attempts`, })
-})
+// /* PUT update tick. */
+// router.put(`/delete/:id`, (req, res, next) => {
+//   res.render(`index`, { title: `update tick`, })
+// })
+//
+// /* DELETE tick. */
+// router.get(`/ticks/:id`, (req, res, next) => {
+//   res.render(`index`, { title: `attempts`, })
+// })
 
 module.exports = router

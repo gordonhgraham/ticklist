@@ -38,6 +38,17 @@ router.post(`/ticks`, (req, res, next) => {
     })
 })
 
+/* DELETE delete tick at /users/delete/ticks/:id */
+router.get(`/delete/ticks/:id`, (req, res, next) => {
+  knex(`ticks`)
+    .where(`id`, req.params.id)
+    .del()
+    .then(() => {
+      res.redirect(`/users`)
+    })
+    .catch(err => { if (err) { return err } })
+})
+
 // /* PUT update user at /users/userId. */
 // router.put(`/:id`, (req, res, next) => {
 //   res.render(`index`, { title: `users/:id`, })

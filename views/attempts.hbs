@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col s-6">
             <h1>Attempts On:</h1>
-            <h4>{{tick.name}}	&mdash; {{tick.grade}}</h4>
+            <h4>{{tick.name}}	&mdash; {{tick.grade}}, {{tick.style}}</h4>
             <h5>{{tick.area}}</h5>
         </div>
         <div class="col offset-s4 s-2 add-btn ">
@@ -57,11 +57,11 @@
 
             <tbody>
                 {{#each attempts}}
-                    <tr id="{{id}}">
+                    <tr>
                         <td>{{send_type}}</td>
                         <td>{{partner}}</td>
                         <td>{{notes}}</td>
-                        <td><a class="btn-floating btn-small waves-effect waves-light orange click-to-toggle"><i class="material-icons">delete</i></a></td>
+                        <td><a class="btn-floating btn-small waves-effect waves-light orange click-to-toggle" href="/attempts/delete/{{id}}"><i class="material-icons">delete</i></a></td>
                     </tr>
                 {{/each}}
             </tbody>
