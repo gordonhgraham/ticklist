@@ -32,7 +32,7 @@ router.post(`/ticks/:id`, (req, res, next) => {
       tick_id: tickId,
       send_type: newAttempt.send_type,
       partner: newAttempt.partner,
-      notes: newAttempt.notes,
+      notes: newAttempt.notes
     })
     .then(() => {
       res.redirect(`/attempts/ticks/${tickId}`)
@@ -40,13 +40,18 @@ router.post(`/ticks/:id`, (req, res, next) => {
     .catch(err => { if (err) { return next(err) } })
 })
 
+/* ?tickid={{tick.id}}&atmptid={{id}} */
+
 /* DELETE attempt. */
-router.get(`/delete/:id`, (req, res, next) => {
+router.get(`/delete/`, (req, res, next) => {
+  const tickId = req.query.tick_id
+  const atmptId = req.query.atmpt_id
+
   knex(`attempts`)
-    .where(`id`, req.params.id)
+    .where(`id`, atmptId)
     .del()
     .then(() => {
-      res.redirect(`/attempts/ticks/${req.params.id}`)
+      res.redirect(`/attempts/ticks/${tickId}`)
     })
     .catch(err => { if (err) { return err } })
 })
