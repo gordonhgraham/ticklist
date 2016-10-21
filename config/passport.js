@@ -2,7 +2,7 @@
 
 /* eslint-disable camelcase, max-params */
 
-require(`dotenv`).load()
+require(`dotenv`).config()
 
 // const app = require(`../app.js`)
 // const LocalStrategy = require(`passport-local`).Strategy
