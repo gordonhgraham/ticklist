@@ -14,8 +14,13 @@ router.get(`/`, (req, res, next) => {
   .where(`user_fb_id`, userId)
   .orderBy(`area`)
     .then(data => {
-      // console.log(data)
-      res.render(`user_home`, { layout: `user_layout.hbs`, data })
+      if (data.length > 0) {
+        res.render(`user_home`, { layout: `user_layout.hbs`, data })
+      } else {
+        const data = { name: `Add a climb with the button in the top right.` }
+
+        res.render(`user_home`, { layout: `user_layout.hbs`, data })
+      }
     })
 })
 
