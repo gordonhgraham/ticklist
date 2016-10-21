@@ -42,8 +42,13 @@ router.post(`/ticks/:id`, (req, res, next) => {
 
 /* DELETE attempt. */
 router.get(`/delete/:id`, (req, res, next) => {
-  console.log(`id`, req.params.id)
-  res.redirect(`http://google.com`)
+  knex(`attempts`)
+    .where(`id`, req.params.id)
+    .del()
+    .then(() => {
+      res.redirect(`/attempts/ticks/${req.params.id}`)
+    })
+    .catch(err => { if (err) { return err } })
 })
 
 // /* PUT update tick. */
