@@ -12,6 +12,7 @@ router.get(`/`, (req, res, next) => {
 
   knex(`ticks`)
   .where(`user_fb_id`, userId)
+  .orderBy(`area`)
     .then(data => {
       // console.log(data)
       res.render(`user_home`, { layout: `user_layout.hbs`, data })
@@ -38,6 +39,29 @@ router.post(`/ticks`, (req, res, next) => {
       if (err) { return next(err) }
     })
 })
+
+/* update tick */
+router.post(`/edit/ticks/:id`, (req, res, next) => {
+  const userId = req.session.passport.user.fb_id
+  const tickId = req.params.id
+  const editTick = req.body
+
+  knex(`ticks`)
+    .where(`id`, tickId)
+    .update({
+      user_fb_id: userId,
+      name: editTick.name,
+      area: editTick.area,
+      grade: editTick.grade,
+      style: editTick.style
+    })
+    .then(() => {
+      res.redirect(`/users`)
+    })
+    .catch(err => { if (err) { return err } })
+})
+
+
 
 /* DELETE delete tick at /users/delete/ticks/:id */
 router.get(`/delete/ticks/:id`, (req, res, next) => {

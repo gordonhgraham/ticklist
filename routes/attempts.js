@@ -25,6 +25,8 @@ router.get(`/ticks/:id`, (req, res, next) => {
 /* POST--create attempt. */
 router.post(`/ticks/:id`, (req, res, next) => {
   const tickId = req.params.id
+  console.log(`tickId`, tickId)
+  
   const newAttempt = req.body
 
   knex(`attempts`)
