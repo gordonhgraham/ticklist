@@ -40,7 +40,25 @@ router.post(`/ticks/:id`, (req, res, next) => {
     .catch(err => { if (err) { return next(err) } })
 })
 
-/* ?tickid={{tick.id}}&atmptid={{id}} */
+/* UPDATE attempt. */
+router.post(`/edit/`, (req, res, next) => {
+  const tickId = req.query.tick_id
+  const atmptId = req.query.atmpt_id
+  const editAttempt = req.body
+
+  knex(`attempts`)
+    .where(`id`, atmptId)
+    .update({
+      tick_id: tickId,
+      send_type: editAttempt.send_type,
+      partner: editAttempt.partner,
+      notes: editAttempt.notes
+    })
+    .then(() => {
+      res.redirect(`/attempts/ticks/${tickId}`)
+    })
+    .catch(err => { if (err) { return err } })
+})
 
 /* DELETE attempt. */
 router.get(`/delete/`, (req, res, next) => {
