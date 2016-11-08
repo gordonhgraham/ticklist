@@ -37,17 +37,18 @@ passport.deserializeUser((obj, done) => {
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_CLIENT_ID,
   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-  callbackURL: `http://ghg-ticklist.herokuapp.com/auth/facebook/callback`,
+  callbackURL: `http://localhost:3000/auth/facebook/callback`,
   profileFields: [`id`, `email`, `first_name`, `last_name`]
 },
 (accessToken, refreshToken, profile, cb) => {
+  console.log(`1--facebook Strategy callback init`)
   knex(`users`)
     .where(`fb_id`, profile.id)
     .first()
     .then(data => {
       if (data) {
         // if user exists
-        // console.log(`1-existing user--`, data)
+        console.log(`2--existing user--`, data)
 
         cb(null, data)
       } else {
@@ -61,7 +62,7 @@ passport.use(new FacebookStrategy({
             token: accessToken
           }, `*`)
           .then(user => {
-            // console.log(`2-new user--`, user)
+            console.log(`3--new user--`, user)
 
             return cb(null, user)
           })

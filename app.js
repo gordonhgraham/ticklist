@@ -41,7 +41,9 @@ app.get(`/auth/facebook/callback`,
   passport.authenticate(`facebook`, { failureRedirect: `/login` }),
   (req, res) => {
     // Successful authentication, redirect home.
-    const userId = req.user.fb_id
+    req.session.passport.user.fb_id = req.user[0].fb_id
+    console.log(`req.session.passport.user.fb_id--in app.js`, req.session.passport.user.fb_id)
+    console.log(`req.user[0].fb_id--in app.js`, req.user[0].fb_id)
     res.redirect(`/users`)
   })
 

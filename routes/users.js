@@ -7,14 +7,15 @@ const knex = require(`../knex.js`)
 
 /* GET list ticks from users/userId. */
 router.get(`/`, (req, res, next) => {
-  const userId = req.session.passport.user.fb_id
-  console.log(`!!!!!!!!!!!!!!!!!userId`, userId)
+  // const userId = req.session.passport.user.fb_id
+  const userId = req.user[0].fb_id
+  console.log(`userId`, userId)
+  // console.log(`req.session`, req.session)
 
   knex(`ticks`)
   .where(`user_fb_id`, userId)
   .orderBy(`area`)
     .then(data => {
-      console.log(`@@@@@@@@@@@@userId`, userId)
       if (data.length > 0) {
         res.render(`user_home`, { layout: `user_layout.hbs`, data })
       } else {
