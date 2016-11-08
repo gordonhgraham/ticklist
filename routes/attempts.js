@@ -26,7 +26,7 @@ router.get(`/ticks/:id`, (req, res, next) => {
 router.post(`/ticks/:id`, (req, res, next) => {
   const tickId = req.params.id
   console.log(`tickId`, tickId)
-  
+
   const newAttempt = req.body
 
   knex(`attempts`)
@@ -75,15 +75,5 @@ router.get(`/delete/`, (req, res, next) => {
     })
     .catch(err => { if (err) { return err } })
 })
-
-// /* PUT update tick. */
-// router.put(`/delete/:id`, (req, res, next) => {
-//   res.render(`index`, { title: `update tick`, })
-// })
-//
-// /* DELETE tick. */
-// router.get(`/ticks/:id`, (req, res, next) => {
-//   res.render(`index`, { title: `attempts`, })
-// })
 
 module.exports = router

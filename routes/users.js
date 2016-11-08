@@ -7,10 +7,7 @@ const knex = require(`../knex.js`)
 
 /* GET list ticks from users/userId. */
 router.get(`/`, (req, res, next) => {
-  // const userId = req.session.passport.user.fb_id
   const userId = req.user[0].fb_id
-  console.log(`userId`, userId)
-  // console.log(`req.session`, req.session)
 
   knex(`ticks`)
   .where(`user_fb_id`, userId)
@@ -28,7 +25,8 @@ router.get(`/`, (req, res, next) => {
 
 /* POST create new tick at /users/ticks. */
 router.post(`/ticks`, (req, res, next) => {
-  const userId = req.session.passport.user.fb_id
+  // console.log(req.session)
+  const userId = req.user[0].fb_id
   const newTick = req.body
 
   knex(`ticks`)
@@ -49,7 +47,7 @@ router.post(`/ticks`, (req, res, next) => {
 
 /* update tick */
 router.post(`/edit/ticks/:id`, (req, res, next) => {
-  const userId = req.session.passport.user.fb_id
+  const userId = req.user[0].fb_id
   const tickId = req.params.id
   const editTick = req.body
 
@@ -68,8 +66,6 @@ router.post(`/edit/ticks/:id`, (req, res, next) => {
     .catch(err => { if (err) { return err } })
 })
 
-
-
 /* DELETE delete tick at /users/delete/ticks/:id */
 router.get(`/delete/ticks/:id`, (req, res, next) => {
   knex(`ticks`)
@@ -80,15 +76,5 @@ router.get(`/delete/ticks/:id`, (req, res, next) => {
     })
     .catch(err => { if (err) { return err } })
 })
-
-// /* PUT update user at /users/userId. */
-// router.put(`/:id`, (req, res, next) => {
-//   res.render(`index`, { title: `users/:id`, })
-// })
-//
-// /* DELETE user at /users/userId. */
-// router.delete(`/:id`, (req, res, next) => {
-//   res.render(`index`, { title: `users/:id`, })
-// })
 
 module.exports = router
