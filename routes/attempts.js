@@ -17,15 +17,15 @@ router.get(`/ticks/:id`, (req, res, next) => {
         .where(`id`, tickId)
         .first()
         .then(tick => {
-          res.render(`attempts`, { layout: `user_layout`, attempts, tick, })
+          res.render(`attempts`, { layout: `user_layout`, attempts, tick })
         })
     })
+    .catch(err => { if (err) { return next(err) } })
 })
 
 /* POST--create attempt. */
 router.post(`/ticks/:id`, (req, res, next) => {
   const tickId = req.params.id
-  console.log(`tickId`, tickId)
 
   const newAttempt = req.body
 
@@ -59,7 +59,7 @@ router.post(`/edit/`, (req, res, next) => {
     .then(() => {
       res.redirect(`/attempts/ticks/${tickId}`)
     })
-    .catch(err => { if (err) { return err } })
+    .catch(err => { if (err) { return next(err) } })
 })
 
 /* DELETE attempt. */
@@ -73,7 +73,7 @@ router.get(`/delete/`, (req, res, next) => {
     .then(() => {
       res.redirect(`/attempts/ticks/${tickId}`)
     })
-    .catch(err => { if (err) { return err } })
+    .catch(err => { if (err) { return next(err) } })
 })
 
 module.exports = router
